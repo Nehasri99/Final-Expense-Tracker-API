@@ -1,5 +1,3 @@
-// In Backend/Models/User.js
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,7 +16,7 @@ const UserSchema = new Schema({
         required: true,
     },
     expenses: [
-        {
+        { // ✅ The opening brace for the expense object
             text: {
                 type: String,
                 required: true
@@ -27,15 +25,26 @@ const UserSchema = new Schema({
                 type: Number,
                 required: true
             },
-            // --- Add this new field ---
             category: {
                 type: String,
-                required: false // Not required because 'income' transactions won't have a category
+                required: false
             },
-            createdAt: {
+            // Use 'date' as we implemented previously for custom dates
+            date: {
                 type: Date,
-                default: Date.now
+                // default: Date.now
+                required: true
+            },
+            paymentMethod: {
+                type: String,
+                required: false 
             }
+        } 
+    ],
+     budgets: [
+        {
+            category: { type: String, required: true },
+            limit: { type: Number, required: true }
         }
     ]
 });
